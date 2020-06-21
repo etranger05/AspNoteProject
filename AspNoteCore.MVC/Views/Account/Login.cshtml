@@ -1,0 +1,20 @@
+﻿@model AspNoteCore.MVC.ViewModel.LoginViewModel
+<h3>Login</h3>
+
+<form class="form-horizontal" method="post" asp-controller="Account" asp-action="Login">
+    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+    <div class="form-group">
+        <label>User ID:</label>
+        <input type="text" class="form-control" asp-for="UserId" placeholder="Please input User ID" />
+        <span class="text-danger" asp-validation-for="UserId"></span>
+    </div>
+    <div class="form-group">
+        <label>Password:</label>
+        <input type="password" class="form-control" asp-for="UserPassword" placeholder="Please input User Password" />
+        <span class="text-danger" asp-validation-for="UserPassword"></span>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-success">Login</button>
+    </div>
+</form>
