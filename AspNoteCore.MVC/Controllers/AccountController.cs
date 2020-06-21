@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using AspNoteCore.MVC.DataContext;
 using AspNoteCore.MVC.Models;
 using AspNoteCore.MVC.ViewModel;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AspNoteCore.MVC.Controllers
@@ -30,13 +28,25 @@ namespace AspNoteCore.MVC.Controllers
                     User user = db.Users
                         .FirstOrDefault( u => u.UserId.Equals(model.UserId) && u.UserPassword.Equals(model.UserPassword));
 
-                    if(user != null)                    
+                    if(user != null)
+                    {
+                        HttpContext.Session.SetInt32("USER_LOGIN_KEY",user.UserNo);
                         return RedirectToAction("LoginSuccess", "Home");
+                    }                  
+                        
                 }
 
                 ModelState.AddModelError(string.Empty, "No user or invalid ID/Password");
             }
             return View(model);
+        }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Remove("USER_LOGIN_KEY");
+            //HttpContext.Session.Clear();
+
+            return RedirectToAction("Index", "Home");
         }
 
         /// <summary>
