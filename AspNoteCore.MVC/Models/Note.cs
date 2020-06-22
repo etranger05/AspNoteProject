@@ -1,20 +1,19 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Diagnostics.CodeAnalysis;
 
 namespace AspNoteCore.MVC.Models
 {
     public class Note
     {
         /// <summary>
-        /// Nsote NO is ID - PK
+        /// Note NO is ID - PK
         /// </summary>
         [Key] // Pk
         public int NodeNo { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Please Input Note Title")]
         public string NoteTitle { get; set; }
-        
-        [Required]
+
+        [Required(ErrorMessage = "Please Input Contents")]
         public string  NoteContents { get; set; }
         
         /// <summary>
